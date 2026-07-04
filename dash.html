@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>† OVERDOSE ADMIN PANEL †</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dash-container { max-width: 500px; margin: 40px auto; padding: 10px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+        label { font-weight: 900; color: var(--hot-pink); text-shadow: 1px 1px var(--deep-ink); }
+        input, textarea {
+            width: 100%; padding: 12px; font-family: inherit; font-weight: bold;
+            border: 3px solid var(--deep-ink); background: #fff; color: var(--deep-ink);
+        }
+        textarea { height: 160px; resize: vertical; }
+        #submit-btn {
+            width: 100%; background: var(--lime); color: var(--deep-ink); font-weight: 900;
+            border: 3px solid var(--deep-ink); padding: 12px; cursor: pointer; box-shadow: 4px 4px 0px var(--hot-pink);
+        }
+        #submit-btn:disabled { background: var(--cyan); opacity: 0.6; }
+    </style>
+</head>
+<body style="overflow: auto;">
+
+    <div class="window dash-container">
+        <div class="window-title">
+            <span>† Broadcast Console.exe †</span>
+        </div>
+        <div class="window-body">
+            <div class="input-group">
+                <label for="title">BROADCAST TITLE</label>
+                <input type="text" id="title" placeholder="(Leave blank for rapid thoughts...)">
+            </div>
+
+            <div class="input-group">
+                <label for="content">WHAT'S CORRUPTING YOUR MIND?</label>
+                <textarea id="content" placeholder="Type quick shit here..."></textarea>
+            </div>
+
+            <button id="submit-btn" onclick="publishPost()">TRANSMIT TO FEED</button>
+        </div>
+    </div>
+
+    <script>
+        // 🌟 POINTED STRAIGHT TO YOUR BRAND NEW REPO!
+        const GITHUB_USERNAME = 'SugarHyou';
+        const REPO_NAME = 'x-sugaroverdose-x';
+        const FILE_PATH = 'output/journal.json';
+
+        let GITHUB_TOKEN = localStorage.getItem('overdose_journal_token');
+
+        if (!GITHUB_TOKEN) {
+            GITHUB_TOKEN = prompt("† SYSTEM ACCESS REQUIRED † Please insert your activation key (Token):");
+            if (GITHUB_TOKEN) {
+                localStorage.setItem('overdose_journal_token', GITHUB_TOKEN.trim());
+            } else {
+                alert("Console Locked.");
+            }
+        }
+
+        async function publishPost() {
+            const btn = document.getElementById('submit-btn');
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            if (!GITHUB_TOKEN) return alert("Key missing! Refresh to enter it.");
+            if (!content) return alert("Cannot transmit empty consciousness.");
+
+            btn.innerText = "TRANSMITTING... ⚡";
+            btn.disabled = true;
+
+            const now = new Date();
+            const dateOptions = { month: 'short', day: 'numeric', year: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
+            const formattedDate = `${now.toLocaleDateString('en-US', dateOptions)} - ${now.toLocaleTimeString('en-US', timeOptions)}`;
+
+            const newPost = { date: formattedDate, title: title, content: content };
+
+            try {
+                const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`;
+                let res = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}` } });
+
+                let sha = ""; let currentPosts = [];
+
+                if (res.status === 200) {
+                    const fileData = await res.json();
+                    sha = fileData.sha;
+                    currentPosts = JSON.parse(decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, '')))));
+                } else if (res.status === 401 || res.status === 403) {
+                    localStorage.removeItem('overdose_journal_token');
+                    return alert("Key rejected! Console reset. Refresh and try again.");
+                }
+
+                currentPosts.unshift(newPost);
+
+                let updateRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `✨ Overdose transmission: ${title || 'Quick update'}`,
+                        content: btoa(unescape(encodeURIComponent(JSON.stringify(currentPosts, null, 2)))),
+                        sha: sha
+                    })
+                });
+
+                if (updateRes.status === 200 || updateRes.status === 201) {
+                    alert("TRANSMISSION SUCCESSFUL! 🎀");
+                    document.getElementById('title').value = '';
+                    document.getElementById('content').value = '';
+                } else {
+                    const errData = await updateRes.json();
+                    alert(`Transmission Aborted: ${errData.message}`);
+                }
+            } catch (error) {
+                alert(`Terminal Failure: ${error.message}`);
+            } finally {
+                btn.innerText = "TRANSMIT TO FEED";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
