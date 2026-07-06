@@ -19,7 +19,7 @@
 body {
     height: 100vh;
     overflow: hidden;
-    background-image: url('/assets/graphics/backgrounds/default.png'); 
+    background-image: url('/assets/graphics/backgrounds/default.png');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -37,7 +37,7 @@ header {
 }
 
 .logo {
-    word-break:keep-all;
+    word-break: keep-all;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.4rem;
@@ -99,13 +99,12 @@ header {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 300px; 
+    width: 300px;
 }
 
 /* --- TALKING DIALOGUE STYLING --- */
 .avatar-container {
     width: 100%;
-    height: 180px;
     background: linear-gradient(45deg, #ff9999, #ffff99, #99ccff);
     border: 3px solid #ff0055;
     display: flex;
@@ -127,7 +126,7 @@ header {
     font-weight: bold;
     letter-spacing: 0.5px;
     color: var(--white);
-    word-break: break-word; 
+    word-break: break-word;
 }
 
 .options-container {
@@ -158,7 +157,7 @@ header {
 
 /* MAIN COLUMN TAKES ALL REMAINING SPACE */
 .main-content {
-    flex: 1; 
+    flex: 1;
 }
 
 /* --- BREAKCORE ELEMENTS --- */
@@ -174,12 +173,12 @@ marquee {
     font-size: 2.5rem;
     font-weight: bold;
     color: #00ff66;
-    background: #4a0072; 
+    background: #4a0072;
     padding: 5px;
     border-radius: 5px;
     text-align: center;
     text-shadow: 3px 3px #ff0055, -2px -2px #ffcc00;
-    animation: beat 0.32s infinite alternate; 
+    animation: beat 0.32s infinite alternate;
 }
 
 .status-bar {
@@ -204,6 +203,7 @@ marquee {
     border-image: linear-gradient(90deg, red, yellow, blue) 1;
     background: #ffffff;
 }
+
 .button-link:hover {
     background: #ffcc00;
     color: white;
@@ -211,19 +211,43 @@ marquee {
 
 /* --- HIGH VELOCITY ANIMATIONS --- */
 @keyframes beat {
-    0% { transform: scale(0.92) rotate(-1deg); }
-    100% { transform: scale(1.08) rotate(1deg); }
+    0% {
+        transform: scale(0.92) rotate(-1deg);
+    }
+
+    100% {
+        transform: scale(1.08) rotate(1deg);
+    }
 }
 
 @keyframes glitch {
-    0% { text-shadow: 2px 2px #ff0000; transform: skewX(-3deg); }
-    50% { text-shadow: -2px 2px #00ff00; }
-    100% { text-shadow: 2px -2px #0000ff; transform: skewX(3deg); }
+    0% {
+        text-shadow: 2px 2px #ff0000;
+        transform: skewX(-3deg);
+    }
+
+    50% {
+        text-shadow: -2px 2px #00ff00;
+    }
+
+    100% {
+        text-shadow: 2px -2px #0000ff;
+        transform: skewX(3deg);
+    }
 }
 
-::-webkit-scrollbar { width: 14px; }
-::-webkit-scrollbar-track { background: #ffffcc; }
-::-webkit-scrollbar-thumb { background: #ff0055; border: 2px solid #ffffcc; }
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffcc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff0055;
+    border: 2px solid #ffffcc;
+}
 
 /* Container holding all your stats horizontally right above the dialogue box */
 .status-container {
@@ -255,16 +279,20 @@ marquee {
 .pixel-bar-container {
     width: 100%;
     height: 24px;
-    background: #ffffff; /* White hollow background */
-    border: 3px solid blue; /* Sharp dark border instead of pure black */
+    background: #ffffff;
+    /* White hollow background */
+    border: 3px solid blue;
+    /* Sharp dark border instead of pure black */
     position: relative;
-    padding: 1px; /* Slight gap to emphasize the fill box */
+    padding: 1px;
+    /* Slight gap to emphasize the fill box */
 }
 
 /* Inner blocky fill indicator */
 .pixel-bar-fill {
     height: 100%;
-    transition: width 0.3s steps(4); /* Makes the bar chunk up visually when values change */
+    transition: width 0.3s steps(4);
+    /* Makes the bar chunk up visually when values change */
 }
 
 /* --- FLOATING CHARACTER ANIMATION --- */
@@ -272,10 +300,104 @@ marquee {
     0% {
         transform: translateY(0px) rotate(0deg);
     }
+
     50% {
-        transform: translateY(-12px) rotate(1deg); /* Drifts up gently */
+        transform: translateY(-12px) rotate(1deg);
+        /* Drifts up gently */
     }
+
     100% {
         transform: translateY(0px) rotate(0deg);
     }
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.window-close,
+.window-maximize {
+    border: 2px solid white;
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    /* Prevents text selection highlighting when double clicking */
+}
+
+/* Close is hot pink */
+.window-close {
+    background: #ff0055;
+}
+
+/* Maximize is cyan to match the retro Sugar OS look! */
+.window-maximize {
+    text-shadow: 1px -2px blue;
+    background: red;
+}
+
+/* Optional: Add a little hover effect to make them feel interactive */
+.window-close:hover,
+.window-maximize:hover {
+    background: cyan;
+}
+
+.window-popup {
+    outline: 2px solid white;
+    box-shadow: 10px 10px 3px rgba(137, 43, 226, 0.5);
+}
+
+button {
+    color: inherit;
+    font-family: inherit;
+}
+
+button:hover {
+    border-style: inset !important;
+    background: #00ff66 !important;
+    color: white !important;
+    border-color: limegreen !important;
+}
+
+/* Base text color for tracks */
+.playlist-track {
+    padding: 4px;
+    border-bottom: 1px dashed cyan;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Loop rainbow colors sequentially */
+.playlist-track:nth-child(7n+1) { color: #ff4136; } /* Red */
+.playlist-track:nth-child(7n+2) { color: #ff851b; } /* Orange */
+.playlist-track:nth-child(7n+3) { color: #ffdc00; } /* Yellow */
+.playlist-track:nth-child(7n+4) { color: #2ecc40; } /* Green */
+.playlist-track:nth-child(7n+5) { color: #0074d9; } /* Blue */
+.playlist-track:nth-child(7n+6) { color: #b10dc9; } /* Indigo */
+.playlist-track:nth-child(7n+7) { color: #7401e0; } /* Violet */
+
+/* Optional: Add a text glow effect when hovering over a track */
+.playlist-track:hover {
+    background: #00ff66 !important;
+    color: white !important;
+    border-color: limegreen !important;
+}
+
+.app-icon:hover,
+.app-icon:hover span {
+    background: #00ff66 !important;
+    color: white !important;
+    border-color: limegreen !important;
 }
