@@ -9,67 +9,62 @@
 </head>
 
 <body>
-    <div class="desktop">
-        <div class="profile-side">
-        </div>
 
-        <div class="window main-content" style="display: flex; flex-direction: column;">
-            <div class="window-title">
+    <div class="desktop flex">
+
+        <img id="sugar" src="/assets/art/Sugar-4-(Jul-5-2026).png" style="transform: scaleX(-1); margin-left: -170px;">
+
+        <div class="window main-content flex">
+            <div class=" window-title flex">
                 <span>🌈 HOME</span>
                 <div class="window-close">X</div>
             </div>
 
-            <div class="window-body"
-                style="display: flex; flex-direction: column; gap: 15px; height: 100%; background: lightcyan;">
-
-                <marquee behavior="scroll" direction="left" scrollamount="4"></marquee>
-
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; height: 100%;">
-                    <div id="desktop-grid"
-                        style="flex: 1; min-width: 180px; display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 100px)); gap: 15px; padding: 10px; border: 2px inset cyan; background: rgba(255, 255, 255, 0.7); align-content: start;">
-                        <a href="javascript:void(0)" class="app-icon" onclick="toggleWindow('window-chat');playOpen();"
-                            style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #000; text-align: center;">
-                            <span style="font-size: 2.2rem;">💬</span>
-                            <span
-                                style="background: red; color: white; padding: 1px 4px; font-weight: bold;">chat.exe</span>
+            <div class="window-body flex column">
+                <marquee behavior="scroll" direction="left" scrollamount="4">Moving inline styles...</marquee>
+                <div class="flex" style="height: 100%;">
+                    <div id="desktop-grid">
+                        <a href="javascript:void(0)" class="app flex column"
+                            onclick="toggleWindow('window-chat');playOpen();">
+                            <span class="app-icon">💬</span>
+                            <span class="app-name" style="background: red; color: white;">chat.exe</span>
                         </a>
                     </div>
-                    <div style="display: flex; width: 30%; flex-direction: column; gap: 10px; visibility: hidden; ">
+                    <div id="sidebar" class="flex column">
                         <div class="window">
-                            <div class="window-title">
+                            <div class="window-title flex">
                                 <span>BLOG</span>
                                 <div class="window-close">X</div>
                             </div>
-                            <div class="window-body" id="latest-post-content">
+                            <div class="window-popup-content" id="latest-post-content">
                                 Loading...
                             </div>
                         </div>
 
                         <audio id="audio-engine" src=""></audio>
 
-                        <div id="player-track-title"
-                            style="background: white; padding: 6px; text-align: center; font-size: 0.8rem; border: 2px inset cyan;">
-                            TRACK: [ IDLE / STOPPED ]
+                        <div id="player-track-title">
+                            TRACK:
                         </div>
 
-                        <div style="display: flex; gap: 6px; justify-content: center;">
+                        <div id="player-track-menu" class="flex" style="gap: 6px; justify-content: center;">
                             <button onclick="controlAudio('play')"
-                                style="flex: 1; font-weight: bold; background: cyan; border: 2px outset #00bfff; cursor: pointer; padding: 4px;">►
+                                style="background: cyan; border: 2px outset #00bfff;">►
                                 PLAY</button>
                             <button onclick="controlAudio('pause')"
-                                style="flex: 1; font-weight: bold; background: yellow; border: 2px outset #ffd700; cursor: pointer; padding: 4px; ">Ⅱ
+                                style="background: yellow; border: 2px outset #ffd700;">Ⅱ
                                 PAUSE</button>
                             <button onclick="controlAudio('stop')"
-                                style="flex: 1; font-weight: bold; background: red; border: 2px outset #ff0000; color: white; cursor: pointer; padding: 4px;">■
+                                style="background: red; border: 2px outset #ff0000; color: white;">■
                                 STOP</button>
                         </div>
 
-                        <div
-                            style="background: #fff; overflow-y: auto; display: flex; flex-direction: column; font-size: 0.8rem; border: 2px inset cyan;">
+                        <div id="player-track" class="flex">
                             <div class="playlist-track" onclick="playSong('＋♂', '/assets/audio/music/plus-boy.mp3')">01.
                                 ＋♂</div>
                             <div class="playlist-track"
-                                onclick="playSong('Chiwawa', '/assets/audio/music/Chiwawa.mp3')">02. Chiwawa</div>
+                                onclick="playSong('Chiwawa', '/assets/audio/music/Chiwawa.mp3')">02.
+                                Chiwawa</div>
                             <div class="playlist-track"
                                 onclick="playSong('ELECTRIC WEEKEND ZONE', '/assets/audio/music/ELECTRIC WEEKEND ZONE.mp3')">
                                 03. ELECTRIC WEEKEND ZONE</div>
@@ -82,105 +77,47 @@
             </div>
         </div>
 
-        <img src="/assets/art/Sugar-4-(Jul-5-2026).png" alt="[Sugar Full Body]"
-            style="visibility: hidden; max-height: 100%; margin: 0 -100px; animation: floatCharacter 2.5s ease-in-out infinite; pointer-events: none;">
-    </div>
+        <img id="sugar" src="/assets/art/Sugar-4-(Jul-5-2026).png" style="margin-right: -170px;">
 
-    <div id="window-chat" class="window window-popup hidden"
-        style="max-width: 320px; position: absolute; top: 15%; left: 15%; width: 380px; min-height: 450px; z-index: 100; display: flex; flex-direction: column; border: 4px solid red; box-shadow: 10px 10px 3px rgba(255, 0, 0, 0.5);">
-        <div class="window-title"
-            style="background: red; display: flex; justify-content: space-between; align-items: center; cursor: move; user-select: none;">
-            <span>Chat
-                <span id="online-status" style="color: lime; animation: blinker 1.5s linear infinite;">🟢 ONLINE</span>
-            </span>
-            <div style="display: flex; gap: 6px; align-items: center;">
+        <div id="window-chat" class="window window-popup hidden flex" style="width: 280px; border: 4px solid red;">
+            <div class="window-title flex" style="background: red;">
+                <span>Chat
+                    <span id="online-status" style="color: lime; animation: blinker 1.5s linear infinite;">🟢
+                        ONLINE</span>
+                </span>
                 <div class="window-close" onclick="toggleWindow('window-chat')">X</div>
             </div>
-        </div>
 
-        <div id="chat-window-body" class="window-body"
-            style="background: white; padding: 10px; flex: 1; display: flex; flex-direction: column; gap: 10px;">
-            <div
-                style="padding: 0 0 7px; display: flex; flex-direction: column; gap: 6px; font-size: 0.75rem; font-weight: bold; border-bottom: 1px dashed #ccc;">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                    <span style="color: red; width: 65px; flex-shrink: 0;">STRESS:</span>
-                    <div style="flex: 1; height: 12px; background: #eee; border: 1px solid #000; position: relative;">
-                        <div id="meter-stress"
-                            style="height: 100%; background: linear-gradient(90deg, #ff6666, red); width: 0%;"></div>
-                    </div>
-                    <span id="txt-stress" style="width: 30px; text-align: right;">0%</span>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                    <span style="color: hotpink; width: 65px; flex-shrink: 0;">AFFECTION:</span>
-                    <div style="flex: 1; height: 12px; background: #eee; border: 1px solid #000; position: relative;">
-                        <div id="meter-affection"
-                            style="height: 100%; background: linear-gradient(90deg, #ff99bb, #ff0055); width: 0%;">
+            <div id="chat-window-body" class="window-popup-content flex column">
+                <div class="flex"
+                    style="padding: 0 0 10px; flex-direction: column; gap: 6px; font-size: 0.75rem; font-weight: bold;">
+                    <div class="flex" style="align-items: center; justify-content: space-between; gap: 8px;">
+                        <span style="color: red; width: 65px;">STRESS:</span>
+                        <div style="flex: 1; height: 12px; background: #eee; border: 1px solid red;">
+                            <div id="meter-stress" style="height: 100%; background: red; width: 0%;"></div>
                         </div>
+                        <span id="txt-stress" style="width: 30px; text-align: right;">0%</span>
                     </div>
-                    <span id="txt-affection" style="width: 30px; text-align: right;">0%</span>
-                </div>
-            </div>
-
-            <div class="avatar-container" style="text-align: center;">
-    <img id="sugar-avatar" 
-         src="/assets/art/SUGARWIP.png" 
-         alt="[SUGAR-CHAN GRAPHIC]"
-         onclick="handleSugarClick()" 
-         style="max-width: 100%; max-height: 170px; object-fit: cover; cursor: pointer;">
-</div>
-            <div class="dialogue-text-box" id="dialogue-box">
-                Loading...
-            </div>
-            <div class="options-container" id="options-box" style="display: flex; flex-direction: column; gap: 4px;">
-            </div>
-        </div>
-    </div>
-
-    <div id="window-about" class="window window-popup hidden"
-        style="border: 4px solid orange; position: absolute; top: 25%; left: 25%; width: 340px; min-height: 280px; z-index: 100; display: flex; flex-direction: column; box-shadow: 10px 10px 3px rgba(255, 166, 0, 0.5)">
-        <div class="window-title"
-            style="background: orange; display: flex; justify-content: space-between; align-items: center; cursor: move; user-select: none;">
-            <span>about_me.txt</span>
-            <div class="window-close" onclick="toggleWindow('window-about')">
-                X</div>
-        </div>
-        <div style="display: flex; background: #ffffcc; border-bottom: 2px inset cyan; padding: 2px; gap: 4px;">
-            <button class="tab-btn" onclick="switchAboutTab('tab-bio'); playClick();"
-                style="background: red; color: white;; border: 2px inset #000; cursor: pointer; font-weight: bold; padding: 2px 6px;">BASICS</button>
-
-            <button class="tab-btn" onclick="switchAboutTab('tab-likes'); playClick();"
-                style="background: orange; border: 2px outset #fff; cursor: pointer; font-weight: bold; padding: 2px 6px; opacity: 0.7;">LIKES/DISLIKES</button>
-
-            <button class="tab-btn" onclick="switchAboutTab('tab-likes'); playClick();"
-                style="background: yellow; border: 2px outset #fff; cursor: pointer; font-weight: bold; padding: 2px 6px; opacity: 0.7;">HOBBIES</button>
-        </div>
-
-        <div class="window-body" style="background: white; padding: 12px; flex: 1; overflow-y: auto;">
-
-            <div id="tab-bio" class="about-tab-content">
-                <div style="display: flex; gap: 10px; margin-bottom: 8px; align-items: center;">
-                    <img src="/assets/art/Sugar-3-(Jul-4-2026).png" style="width: 130px;">
-                    <div>
-
-                        <p style="margin: 4px 0;"><strong>Username:</strong> Sugar0verdosed</p>
-                        <p style="margin: 4px 0;"><strong>Nickname:</strong> Sugar, Sugar-Chan, Sato</p>
-                        <p style="margin: 4px 0;"><strong>Goal:</strong> Find the love of my life and get rich!</p>
+                    <div class="flex" style="align-items: center; justify-content: space-between; gap: 8px;">
+                        <span style="color: hotpink; width: 65px;">AFFECTION:</span>
+                        <div style="flex: 1; height: 12px; background: #eee; border: 1px solid red;">
+                            <div id="meter-affection" style="height: 100%; background: hotpink; width: 0%;"></div>
+                        </div>
+                        <span id="txt-affection" style="width: 30px; text-align: right; color: hotpink;">0%</span>
                     </div>
                 </div>
-                <hr style="border: 1px dashed #ccc;">
-            </div>
 
-            <div id="tab-likes" class="about-tab-content" style="display: none;">
-                <span style="background: lime; padding: 1px 4px; font-weight: bold; font-size: 0.75rem;">FAVORITE
-                    MATRIX:</span>
-                <ul style="margin: 8px 0; padding-left: 18px; gap: 4px; display: flex; flex-direction: column;">
-                    <li>🎵 <strong>Aesthetic:</strong> Kidcore / Clowncore / Noise Art</li>
-                    <li>🎮 <strong>Nintendo:</strong> Splat 3 (Dualie Squelchers mains!)</li>
-                    <li>💊 <strong>Survival:</strong> Validation, attention, and pixel brushes</li>
-                    <li>❌ <strong>Dislikes:</strong> Missing dosages, quiet rooms, hospitals.</li>
-                </ul>
+                <div class="avatar-container" style="text-align: center;">
+                    <img id="sugar-avatar" src="/assets/art/SUGARWIP.png" alt="[SUGAR-CHAN GRAPHIC]"
+                        onclick="handleSugarClick()"
+                        style="max-width: 100%; max-height: 170px; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="dialogue-text-box" id="dialogue-box">
+                    Loading...
+                </div>
+                <div class="options-container flex" id="options-box" style="flex-direction: column; gap: 4px;">
+                </div>
             </div>
-
         </div>
     </div>
 

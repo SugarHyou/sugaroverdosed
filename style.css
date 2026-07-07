@@ -29,11 +29,26 @@ body {
     padding: 10px;
 }
 
-/* --- STIMULATING TOP BAR --- */
-header {
+strong {
+    color: red;
+}
+
+hr {
+    background-image: url('/assets/graphics/dividers/Rainbow.webp');
+    background-size: contain;
+    background-position: center;
+    background-repeat: repeat-x;
+    border: none;
+    filter: contrast(2);
+    height: 25px;
+}
+
+.flex {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+}
+
+.column {
+    flex-direction: column;
 }
 
 .logo {
@@ -45,19 +60,30 @@ header {
     animation: glitch 0.5s infinite alternate;
 }
 
-/* --- LAYOUT --- */
 .desktop {
-    display: flex;
+    justify-content: space-between;
     gap: 15px;
     flex: 1;
     max-height: 100%;
+    z-index: 1;
+}
+
+#desktop-grid {
+    flex: 1;
+    min-width: 180px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 100px));
+    gap: 15px;
+    padding: 10px;
+    border: 2px inset cyan;
+    background: rgba(255, 255, 255, 0.7);
+    align-content: start;
 }
 
 .window {
     background: var(--white);
     border: 4px solid;
     border-image: var(--rainbow-gradient-border);
-    display: flex;
     flex-direction: column;
 }
 
@@ -66,12 +92,12 @@ header {
     color: var(--white);
     padding: 0 5px 5px;
     font-weight: bold;
-    font-size: 1rem;
     text-transform: uppercase;
     text-shadow: 1px 1px blue;
-    display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: move;
+    user-select: none;
 }
 
 .window-close {
@@ -80,26 +106,17 @@ header {
     color: white;
     width: 20px;
     height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
 }
 
 .window-body {
+    height: 100%;
+    background: lightcyan;
+    gap: 10px;
     padding: 10px;
     overflow-y: auto;
-    flex: 1;
-}
-
-/* --- FIXED WIDTH SIDE PANEL --- */
-.profile-side {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 300px;
 }
 
 /* --- TALKING DIALOGUE STYLING --- */
@@ -150,14 +167,15 @@ header {
 }
 
 .dialogue-choice:hover {
+    -webkit-text-fill-color: unset;
     background: #00ff66;
-    color: white;
+    color: white !important;
     border-color: limegreen;
 }
 
 /* MAIN COLUMN TAKES ALL REMAINING SPACE */
 .main-content {
-    flex: 1;
+    flex: 0.9;
 }
 
 /* --- BREAKCORE ELEMENTS --- */
@@ -285,30 +303,11 @@ marquee {
     /* Sharp dark border instead of pure black */
     position: relative;
     padding: 1px;
-    /* Slight gap to emphasize the fill box */
 }
 
-/* Inner blocky fill indicator */
 .pixel-bar-fill {
     height: 100%;
     transition: width 0.3s steps(4);
-    /* Makes the bar chunk up visually when values change */
-}
-
-/* --- FLOATING CHARACTER ANIMATION --- */
-@keyframes floatCharacter {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-12px) rotate(1deg);
-        /* Drifts up gently */
-    }
-
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
 }
 
 @keyframes blinker {
@@ -355,8 +354,18 @@ marquee {
 }
 
 .window-popup {
+    position: absolute;
+    top: 15%;
+    left: 15%;
     outline: 2px solid white;
-    box-shadow: 10px 10px 3px rgba(137, 43, 226, 0.5);
+    min-height: 280px;
+    box-shadow: 10px 10px 3px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.window-popup-content {
+    padding: 10px;
+    background: white;
 }
 
 button {
@@ -380,24 +389,142 @@ button:hover {
 }
 
 /* Loop rainbow colors sequentially */
-.playlist-track:nth-child(7n+1) { color: #ff4136; } /* Red */
-.playlist-track:nth-child(7n+2) { color: #ff851b; } /* Orange */
-.playlist-track:nth-child(7n+3) { color: #ffdc00; } /* Yellow */
-.playlist-track:nth-child(7n+4) { color: #2ecc40; } /* Green */
-.playlist-track:nth-child(7n+5) { color: #0074d9; } /* Blue */
-.playlist-track:nth-child(7n+6) { color: #b10dc9; } /* Indigo */
-.playlist-track:nth-child(7n+7) { color: #7401e0; } /* Violet */
+.playlist-track:nth-child(7n+1) {
+    color: #ff4136;
+}
 
-/* Optional: Add a text glow effect when hovering over a track */
+/* Red */
+.playlist-track:nth-child(7n+2) {
+    color: #ff851b;
+}
+
+/* Orange */
+.playlist-track:nth-child(7n+3) {
+    color: #ffdc00;
+}
+
+/* Yellow */
+.playlist-track:nth-child(7n+4) {
+    color: #2ecc40;
+}
+
+/* Green */
+.playlist-track:nth-child(7n+5) {
+    color: #0074d9;
+}
+
+/* Blue */
+.playlist-track:nth-child(7n+6) {
+    color: #b10dc9;
+}
+
+.playlist-track:nth-child(7n+7) {
+    color: #7401e0;
+}
+
 .playlist-track:hover {
     background: #00ff66 !important;
     color: white !important;
     border-color: limegreen !important;
 }
 
-.app-icon:hover,
-.app-icon:hover span {
+.app {
+    align-items: center;
+    text-decoration: none;
+}
+
+.app:hover,
+.app:hover span {
     background: #00ff66 !important;
     color: white !important;
     border-color: limegreen !important;
 }
+
+.app-icon {
+    font-size: 2.2rem;
+}
+
+.app-name {
+    padding: 1px 4px;
+    font-weight: bold;
+}
+
+#sidebar {
+    padding: 10px;
+    width: 30%;
+    gap: 10px;
+}
+
+#player-track-title {
+    background: white;
+    padding: 6px;
+    text-align: center;
+    font-size: 0.8rem;
+    border: 2px inset cyan;
+}
+
+#player-track-menu button {
+    flex: 1;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px;
+}
+
+#player-track {
+    background: #fff;
+    flex-direction: column;
+    border: 2px inset cyan;
+}
+
+.tab-btn {
+    background: red;
+    color: white;
+    border: 2px inset #000;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 2px 6px;
+}
+
+#sugar {
+    pointer-events: none;
+    max-height: 100%;
+    margin: 0 -100px;
+}
+
+blockquote {
+    margin: 10px 0 0;
+    padding: 10px;
+    background: #ffffcc;
+    position: relative;
+    color: blue;
+    quotes: "\201C""\201D";
+    opacity: 0.6;
+}
+
+@keyframes rainbow-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.rainbow-text {
+    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, cyan, #0000ff, blueviolet);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-shift 3s ease infinite;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.locked-box {
+    background-color: #555; /* Dark Grey */
+    color: #ccc;
+    border: 2px solid #888;
+    padding: 5px;
+    cursor: not-allowed;
+    border-style: dashed;
+    pointer-events: none;
+    margin-bottom: 5px; /* Adds space between buttons */
+}
+

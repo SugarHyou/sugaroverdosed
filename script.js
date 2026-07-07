@@ -12,21 +12,42 @@ const dialogueTree = {
         typingImage: "/assets/art/SUGARWIP2.png",
         gifImage: "/assets/art/SUGARWIP2.png",
         choices: [
-            { text: "Uh, hi?", nextNode: "introHappy" },
-            { text: "[ Watch quietly ]", nextNode: "introHappy" }
+            { text: "It's okay!", nextNode: "introHappy" },
+            { text: "Who are you?", nextNode: "introQues" },
+            { text: "Take your time.", nextNode: "introHappy" },
+            { text: "...", nextNode: "introQuiet" }
         ]
     },
     introHappy: {
-        text: "HIIII!!! Welcome! I'm Sugar! I literally crave attention so much, thank you for clicking on me! Let me set up the system for you... hold on... OKIE! I unlocked a file for you on your desktop!",
-        typingImage: "sugar_hyped.png",
-        gifImage: "/assets/art/Sugar-2-(Jul-3-2026).gif",
+        text: "Thank you, just... One sec... Okay! Hi! I'm Sugar! Welcome to my website! There's not much going on right now, but... Well, actually, hold on... OKAY! I just unlocked my 'About Me' text file so you have something to do. Check it out!",
+        typingImage: "/assets/art/",
+        gifImage: "/assets/art/",
         choices: [
-            { text: "Awesome! What do you like?", nextNode: "mainMenu" }
+            { text: "Nice to meet you!", nextNode: "mainMenu" }
         ],
         onLoad: () => {
-            if (!localStorage.getItem('unlocked_window-about')) {
-                unlockDesktopFile('window-about', '📂', 'about_me.txt');
-            }
+            localStorage.setItem('sugar_intro_done', 'true');
+        }
+    },
+    introQues: {
+        text: "One sec... Okay! Uh-I'm Sugar! I don't know how else to answer that question other than my name... Y'know what? I made something that could help. Here, there should be a new 'About Me' file on the site! Look through it so... You know. Your question will be answered there.",
+        typingImage: "/assets/art/",
+        gifImage: "/assets/art/",
+        choices: [
+            { text: "Thanks!", nextNode: "mainMenu" }
+        ],
+        onLoad: () => {
+            localStorage.setItem('sugar_intro_done', 'true');
+        }
+    },
+    introQuiet: { 
+        text: "... Um. Okay, I think I'm good now. Hi...? I'm Sugar. Are you not very talkative? It's kinda creepy to just stare... Well, that's okay! I can talk for the both of us. Wait, actually-I have something you might like! Click on the new 'About Me' icon that just showed up. It's just reading, no talking, promise! Just to get to know a bit about... Uh. I guess It's self explanatory.",
+        typingImage: "/assets/art/",
+        gifImage: "/assets/art/",
+        choices: [
+            { text: "Continue.", nextNode: "mainMenu" }
+        ],
+        onLoad: () => {
             localStorage.setItem('sugar_intro_done', 'true');
         }
     },
@@ -35,9 +56,6 @@ const dialogueTree = {
         typingImage: "/assets/art/Sugar-(Jul-3-2026).png",
         gifImage: "/assets/art/Sugar-2-(Jul-3-2026).gif",
         choices: [
-            { text: "Breakcore?", nextNode: "breakcore" },
-            { text: "Alt fashion?", nextNode: "altFashion" },
-            { text: "Nintendo games?", nextNode: "nintendoGames" },
         ]
     },
 };
@@ -86,6 +104,12 @@ function loadNode(nodeKey) {
 
     if (node.onLoad) {
         node.onLoad();
+    }
+
+    if (nodeKey === 'mainMenu') {
+        if (unlockedInteractions.username) {
+            node.choices.push({ text: "Where did your username come from?", nextNode: "loreUsername" });
+        }
     }
 
     typeWriterEffect(node.text, 0, textElement, () => {
@@ -404,7 +428,7 @@ function switchAboutTab(tabId) {
     tabs.forEach(tab => tab.style.display = 'none');
 
     const targetTab = document.getElementById(tabId);
-    if (targetTab) targetTab.style.display = 'block';
+    if (targetTab) targetTab.style.display = 'flex';
 
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => {
@@ -424,7 +448,6 @@ function addShortcutToDesktop(windowId) {
     if (!desktopGrid) return;
 
     const iconConfig = {
-        'window-about': { emoji: '📂', text: 'about_me.txt' },
         'window-chat': { emoji: '💬', text: 'chat.exe' }
     };
 
@@ -437,13 +460,27 @@ function addShortcutToDesktop(windowId) {
         toggleWindow(windowId);
         playOpen();
     };
-    shortcutElement.classList.add('app-icon');
-    shortcutElement.style = "display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #000; text-align: center;";
+    shortcutElement.classList.add('app', 'flex', 'column');
     shortcutElement.innerHTML = `
-        <span style="font-size: 2.2rem;">${config.emoji}</span>
-        <span style="background: orange; color: white; padding: 1px 4px; font-weight: bold;">${config.text}</span>
+        <span class="app-icon">${config.emoji}</span>
+        <span class="app-name" style="background: orange; color: white;">${config.text}</span>
     `;
 
     desktopGrid.appendChild(shortcutElement);
     unlockedApps.add(windowId);
+}
+
+// Tracks if the user has clicked these things
+const unlockedInteractions = JSON.parse(localStorage.getItem('unlocked_interactions')) || {
+    username: false,
+    art: false,
+    breakcore: false,
+    weather: false
+};
+
+function unlockInteraction(key) {
+    unlockedInteractions[key] = true;
+    localStorage.setItem('unlocked_interactions', JSON.stringify(unlockedInteractions));
+    playClick();
+    loadNode(currentDialogueNode);
 }
