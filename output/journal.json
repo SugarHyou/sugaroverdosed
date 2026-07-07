@@ -1,10 +1,15 @@
 {
   "currentStats": {
-    "stress": 70,
-    "affection": 23,
-    "darkness": 11
+    "stress": 20,
+    "affection": 50,
+    "darkness": 10
   },
   "posts": [
+    {
+      "date": "Jul 7, 2026 - 12:32 AM",
+      "title": "mcdonalds... ",
+      "content": "that chicken was very pickle-y..."
+    },
     {
       "date": "Jul 5, 2026 - 08:08 PM",
       "title": "She's So Angry All the Time",
