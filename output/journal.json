@@ -1,9 +1,14 @@
 {
   "currentStats": {
     "stress": 20,
-    "affection": 50
+    "affection": 30
   },
   "posts": [
+    {
+      "date": "Jul 8 - 02:55 PM",
+      "title": "test",
+      "content": "test"
+    },
     {
       "date": "Jul 7, 2026 - 12:32 AM",
       "title": "mcdonalds... ",
