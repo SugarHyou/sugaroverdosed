@@ -26,6 +26,7 @@ body {
     font-family: 'Main';
     color: blue;
     gap: 15px;
+    padding: 10px 0;
 }
 
 strong {

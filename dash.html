@@ -64,12 +64,76 @@
     </div>
 
     <script>
-        function saveMode(mode) {
-            localStorage.setItem('sugar_mode_request', mode);
-            alert("Mode set to: " + mode.toUpperCase());
+    const GITHUB_USERNAME = 'SugarHyou';
+    const REPO_NAME = 'sugaroverdosed';
+    const FILE_PATH = 'output/journal.json';
+
+    function saveMode(mode) {
+        localStorage.setItem('sugar_mode_request', mode);
+        alert("Command Sent: " + mode.toUpperCase());
+    }
+
+    async function publishPost() {
+        let GITHUB_TOKEN = localStorage.getItem('overdose_journal_token');
+        if (!GITHUB_TOKEN) {
+            GITHUB_TOKEN = prompt("† SYSTEM ACCESS REQUIRED † Please insert your activation key:");
+            if (GITHUB_TOKEN) localStorage.setItem('overdose_journal_token', GITHUB_TOKEN.trim());
+            else return;
         }
-        
-        // Include your publishPost() logic here...
-    </script>
+
+        const btn = document.getElementById('submit-btn');
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+        const targetStress = parseInt(document.getElementById('stat-stress').value);
+        const targetAffection = parseInt(document.getElementById('stat-affection').value);
+
+        if (!content) return alert("Cannot transmit empty consciousness.");
+
+        btn.innerText = "TRANSMITTING... ⚡";
+        btn.disabled = true;
+
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' - ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        try {
+            const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`;
+            let res = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}` } });
+            let sha = "";
+            let dbStructure = { currentStats: { stress: targetStress, affection: targetAffection }, posts: [] };
+
+            if (res.status === 200) {
+                const fileData = await res.json();
+                sha = fileData.sha;
+                dbStructure = JSON.parse(decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, '')))));
+            }
+
+            dbStructure.currentStats = { stress: targetStress, affection: targetAffection };
+            dbStructure.posts.unshift({ date: formattedDate, title: title, content: content });
+
+            let updateRes = await fetch(url, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: `📈 Stats & Post: ${title || 'Update'}`,
+                    content: btoa(unescape(encodeURIComponent(JSON.stringify(dbStructure, null, 2)))),
+                    sha: sha
+                })
+            });
+
+            if (updateRes.status === 200 || updateRes.status === 201) {
+                alert("TRANSMITTED SUCCESSFULLY! 🎀");
+                document.getElementById('title').value = '';
+                document.getElementById('content').value = '';
+            } else {
+                alert("Error writing to core.");
+            }
+        } catch (error) {
+            alert(`Terminal Error: ${error.message}`);
+        } finally {
+            btn.innerText = "TRANSMIT TO CORE ⚡";
+            btn.disabled = false;
+        }
+    }
+</script>
 </body>
 </html>
