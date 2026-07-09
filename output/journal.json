@@ -1,9 +1,14 @@
 {
   "currentStats": {
-    "stress": 20,
-    "affection": 30
+    "stress": 49,
+    "affection": 10
   },
   "posts": [
+    {
+      "date": "Jul 8 - 10:07 PM",
+      "title": "Slosh...",
+      "content": "Too much CranMango..."
+    },
     {
       "date": "Jul 8 - 02:55 PM",
       "title": "test",
