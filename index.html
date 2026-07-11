@@ -42,6 +42,11 @@
                             <span class="app-name" style="background: yellow;">about_me.txt</span>
                         </a>
 
+                        <a href="javascript:void(0)" class="app flex column"
+                            onclick="toggleWindow('window-info');playOpen();">
+                            <span class="app-icon">⚙️</span>
+                            <span class="app-name" style="background: limegreen; color: white;">info.sys</span>
+                        </a>
 
                     </div>
                     <div id="sidebar" class="flex column">
@@ -224,10 +229,49 @@
                                 <img src="/assets/art/Sugar-7C-(Jul-9-2026).gif" width="80">I feel like they're just not
                                 really having fun. At all. It stresses me out!
                             </span>
-                        </span>, Winter, Soda
+                        </span>, <span class="has-tooltip">Winter
+                            <span class="tooltip-text"><img src="/assets/art/Sugar-7E-(Jul-9-2026).gif" width="80">I
+                                hate the cold! It makes my leg hurt!</span>
+                        </span>, <span class="has-tooltip">Soda
+                            <span class="tooltip-text"><img src="/assets/art/Sugar-7E-(Jul-9-2026).gif" width="80">From
+                                Coca Cola to Strawberry Fanta, I can't stand carbonated drinks. They taste like
+                                shit!</span>
+                        </span>, <span class="has-tooltip">Parents
+                            <span class="tooltip-text" style="background: black;">
+                                <img src="/assets/art/Sugar-7D-(Jul-9-2026).gif" width="80">
+                            </span>
+                        </span>
                     </p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="window-info" class="window window-popup hidden flex" style="width: 280px; border: 4px solid limegreen;">
+        <div class="window-title flex" style="background: limegreen;">
+            <span>INFO.SYS</span>
+            <div class="window-close" onclick="toggleWindow('window-info')">X</div>
+        </div>
+        <div class="window-popup-content flex column" style="gap: 10px;">
+            <p><strong>SYSTEM_STATUS:</strong> <span style="color: lime;">RUNNING</span></p>
+            <p><strong>BROWSER:</strong> <span id="sys-browser">Detecting...</span></p>
+            <p><strong>SCREEN:</strong> <span id="sys-res">...</span></p>
+            <p><strong>UPTIME:</strong> <span id="sys-uptime">0s</span></p>
+            <p><strong>CREATED:</strong> July 5, 2026</p>
+            <details>
+                <summary style="cursor: pointer; color: blue;">VIEW TOOLS & CREDITS</summary>
+                <div style="margin-top: 5px; padding-left: 10px;">
+                    <p><strong>Editor:</strong> VS Code</p>
+                    <p><strong>Graphics:</strong> IbisPaint</p>
+                    <p><strong>Host:</strong> GitHub Pages & Neocities</p>
+                    <p><strong>Theme:</strong> Decora-SugarOS V9</p>
+                </div>
+            </details>
+
+            <button onclick="optimizeSystem()"
+                style="width: 100%; margin-top: 10px; cursor: pointer; background: #fff; border: 1px solid limegreen;">
+                [ OPTIMIZE SYSTEM ]
+            </button>
         </div>
     </div>
 

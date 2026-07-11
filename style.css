@@ -73,7 +73,7 @@ hr {
 }
 
 .desktop {
-    justify-content: space-between;
+    justify-content: center;
     gap: 15px;
     flex: 1;
     max-height: 100%;

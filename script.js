@@ -408,5 +408,31 @@ function renderCalendar() {
 document.getElementById('prevMonth').onclick = () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); };
 document.getElementById('nextMonth').onclick = () => { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); };
 
-// Initialize
 fetchHolidays(calDate.getFullYear());
+
+function updateSystemInfo() {
+    // Fill basic stats
+    document.getElementById('sys-browser').innerText = navigator.appName || "Web-Navigator";
+    document.getElementById('sys-res').innerText = window.screen.width + "x" + window.screen.height;
+
+    // Start uptime counter
+    let seconds = 0;
+    setInterval(() => {
+        seconds++;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById('sys-uptime').innerText = 
+            (mins > 0 ? mins + "m " : "") + secs + "s";
+    }, 1000);
+}
+
+// Ensure this runs once
+document.addEventListener('DOMContentLoaded', updateSystemInfo);
+
+function optimizeSystem() {
+    const btn = event.target;
+    btn.innerText = "CLEANING...";
+    setTimeout(() => {
+        btn.innerText = "SYSTEM OPTIMIZED!";
+    }, 1500);
+}
