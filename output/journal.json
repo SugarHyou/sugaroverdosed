@@ -1,9 +1,14 @@
 {
   "currentStats": {
-    "stress": 7,
-    "affection": 50
+    "stress": 0,
+    "affection": 82
   },
   "posts": [
+    {
+      "date": "Jul 12 - 11:16 AM",
+      "title": "FESTIVAL TIME!!!",
+      "content": "I'M SO EXCITED TO GO WITH HIM"
+    },
     {
       "date": "Jul 10 - 07:21 PM",
       "title": "",
