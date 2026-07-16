@@ -1,9 +1,14 @@
 {
   "currentStats": {
-    "stress": 0,
-    "affection": 81
+    "stress": 100,
+    "affection": 16
   },
   "posts": [
+    {
+      "date": "Jul 16 - 01:05 AM",
+      "title": "GET ME OUT OF HERE.",
+      "content": "GET ME OUT GET ME OUT GET ME OUT GET ME OUT"
+    },
     {
       "date": "Jul 12 - 11:27 PM",
       "title": "YIPPEEEEEE",
