@@ -69,6 +69,10 @@ hr {
     justify-content: center;
 }
 
+.justify-between {
+    justify-content: space-evenly;
+}
+
 .logo {
     word-break: keep-all;
     text-transform: uppercase;
@@ -433,7 +437,7 @@ button:hover {
     align-items: center;
     text-decoration: none;
     height: fit-content;
-    min-width: 96px;
+    min-width: 112px;
 }
 
 .app:hover,
@@ -448,8 +452,9 @@ button:hover {
 }
 
 .app-name {
+    text-align: center;
+    width: 100%;
     padding: 1px 4px;
-    font-weight: bold;
 }
 
 #sidebar {
@@ -487,7 +492,7 @@ button:hover {
     z-index: -1;
     pointer-events: none;
     max-height: 100%;
-    margin: 0 -150px;
+    margin: 0 -100px;
 }
 
 blockquote {
@@ -575,6 +580,34 @@ blockquote {
     visibility: visible;
 }
 
+/* Custom Commissions Style */
+#window-commissions {
+    z-index: 100;
+    box-shadow: 5px 5px 0px rgba(138, 43, 226, 0.5);
+}
+
+.comm-card {
+    transition: transform 0.2s;
+}
+
+.comm-card:hover {
+    transform: rotate(-3deg) scale(1.05);
+    background: #fff0ff !important;
+}
+
+/* Add a sparkle effect to the banner */
+.comm-banner {
+    background: red !important;
+    animation: rainbow 3s infinite;
+}
+
+@keyframes rainbow {
+    0% { background: hotpink; }
+    33% { background: cyan; }
+    66% { background: yellow; }
+    100% { background: hotpink; }
+}
+
 .andy-mode {
     background-image: url('/assets/graphics/backgrounds/andy.jpg');
     background-size: contain;
@@ -583,13 +616,11 @@ blockquote {
 }
 
 .andy-mode .window {
-    background: red;
-    border-color: red;
+    border-color: red !important;
 }
 
 .andy-mode .window-title {
-    background: #191f31 !important;
-    color: #fff !important;
+    background: blue !important;
 }
 
 .andy-mode #sugar {

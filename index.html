@@ -22,8 +22,8 @@
             </div>
 
             <div class="window-popup-content flex column" style="height: 100%; overflow: hidden; gap: 10px;">
-                <marquee behavior="scroll" direction="left" scrollamount="4">Updating script.js...</marquee>
-                <div class="flex justify-center" style="flex-direction: row; height: 100%; gap: 10px;">
+                <marquee behavior="scroll" direction="left" scrollamount="4">Updating index.html...</marquee>
+                <div class="flex justify-between" style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
                     <a href="javascript:void(0)" class="app flex column"
                         onclick="toggleWindow('window-chat');playOpen();">
                         <span class="app-icon">💬</span>
@@ -41,94 +41,26 @@
                         <span class="app-name" style="background: yellow;">about_me.txt</span>
                     </a>
 
+                    <!-- Replace your old info/notepad links with these -->
                     <a href="javascript:void(0)" class="app flex column"
-                        onclick="toggleWindow('window-info');playOpen();">
-                        <span class="app-icon">⚙️</span>
-                        <span class="app-name" style="background: limegreen; color: white;">info.sys</span>
+                        onclick="toggleWindow('window-blog');playOpen();">
+                        <span class="app-icon">📰</span>
+                        <span class="app-name" style="background: limegreen; color: white;">blog.exe</span>
                     </a>
 
                     <a href="javascript:void(0)" class="app flex column"
-                        onclick="toggleWindow('window-notepad');playOpen();">
-                        <span class="app-icon">📝</span>
-                        <span class="app-name" style="background: white; color: black;">notepad.exe</span>
+                        onclick="toggleWindow('window-playlist');playOpen();">
+                        <span class="app-icon">🎵</span>
+                        <span class="app-name" style="background: dodgerblue; color: white;">music.exe</span>
+                    </a>
+
+                    <a href="javascript:void(0)" class="app flex column"
+                        onclick="toggleWindow('window-commissions');playOpen();">
+                        <span class="app-icon">🎨</span>
+                        <span class="app-name" style="background: blueviolet; color: white;">commissions.txt</span>
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <div id="sidebar" class="flex column">
-            <div id="latest-post-content" class="window">
-                <div class="window-title flex">
-                    <span>BLOG</span>
-                    <div class="window-close">X</div>
-                </div>
-                <div class="window-popup-content">
-                    <div id="blog-header" class="flex" style="align-items: center; gap: 8px; margin-bottom: 8px;">
-                        <img id="blog-pfp" src="/assets/art/Sugar-3-(Jul-4-2026).png"
-                            style="width: 35px; height: 35px; border: 2px solid red;">
-                        <div class="flex column">
-                            <span style="font-weight: 900;">Sugar0verdosed</span>
-                            <span id="blog-date" style="font-size: 0.65rem; opacity: 0.7;"></span>
-                        </div>
-                    </div>
-                    <h3 id="blog-title" style="margin: 0 0 5px 0;"></h3>
-                    <div id="blog-body">Loading...</div>
-                </div>
-            </div>
-
-            <audio id="audio-engine" src=""></audio>
-
-            <div class="window">
-                <div class="window-title flex">
-                    <span>PLAYLIST</span>
-                    <div class="window-close">X</div>
-                </div>
-                <div class="window-popup-content flex column" style="gap: 10px;">
-                    <div id="player-track-title">
-                        TRACK:
-                    </div>
-
-                    <div id="player-track-menu" class="flex" style="gap: 6px; justify-content: center;">
-                        <button onclick="controlAudio('play')" style="background: cyan; border: 2px outset #00bfff;">►
-                            PLAY</button>
-                        <button onclick="controlAudio('pause')"
-                            style="background: yellow; border: 2px outset #ffd700;">Ⅱ
-                            PAUSE</button>
-                        <button onclick="controlAudio('stop')"
-                            style="background: red; border: 2px outset #ff0000; color: white;">■
-                            STOP</button>
-                    </div>
-
-                    <div id="player-track" class="flex column">
-                        <div class="playlist-track"
-                            onclick="playSong('混沌ブギ 初音ミク', '/assets/audio/music/混沌ブギ 初音ミク.mp3')">01.
-                            混沌ブギ 初音ミク</div>
-                        <div class="playlist-track" onclick="playSong('＋♂', '/assets/audio/music/plus-boy.mp3')">02.
-                            ＋♂</div>
-                        <div class="playlist-track" onclick="playSong('BANG BANG BANG', '/assets/audio/music/BANG BANG BANG.mp3')">03.
-                            BANG BANG BANG</div>
-                        <div class="playlist-track" onclick="playSong('Chiwawa', '/assets/audio/music/Chiwawa.mp3')">03.
-                            Chiwawa</div>
-                        <div class="playlist-track"
-                            onclick="playSong('Confessions of a Rotten Girl', '/assets/audio/music/Confessions of a Rotten Girl.mp3')">
-                            04.
-                            Confessions of a Rotten Girl</div>
-                        <div class="playlist-track"
-                            onclick="playSong('ELECTRIC WEEKEND ZONE', '/assets/audio/music/ELECTRIC WEEKEND ZONE.mp3')">
-                            05. ELECTRIC WEEKEND ZONE</div>
-                        <div class="playlist-track" onclick="playSong('Indecent', '/assets/audio/music/Indecent.mp3')">
-                            07. Indecent</div>
-                        <div class="playlist-track"
-                            onclick="playSong('INTERNET ANGEL', '/assets/audio/music/INTERNET ANGEL.mp3')">
-                            08. INTERNET ANGEL</div>
-                        <div class="playlist-track"
-                            onclick="playSong('INTERNET OVERDOSE', '/assets/audio/music/INTERNET OVERDOSE.mp3')">09.
-                            INTERNET OVERDOSE</div>
-                        <div class="playlist-track"
-                            onclick="playSong('Let\'s Go Gambling!', '/assets/audio/music/Let\'s Go Gambling!.mp3')">
-                            10. Let's Go Gambling!</div>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
@@ -253,44 +185,74 @@
         </div>
     </div>
 
-    <div id="window-info" class="window window-popup hidden flex" style="width: 280px; border: 4px solid limegreen;">
+    <div id="window-blog" class="window window-popup hidden flex" style="width: 350px; border: 4px solid limegreen;">
         <div class="window-title flex" style="background: limegreen;">
-            <span>INFO.SYS</span>
-            <div class="window-close" onclick="toggleWindow('window-info')">X</div>
+            <span>BLOG.EXE</span>
+            <div class="window-close" onclick="toggleWindow('window-blog')">X</div>
+        </div>
+        <div class="window-popup-content" id="blog-posts-container" style="max-height: 400px; overflow-y: auto;">
+            <!-- All blog posts will be injected here -->
+        </div>
+    </div>
+
+    <!-- Add this window code -->
+<div id="window-playlist" class="window window-popup hidden flex" style="width: 300px; border: 4px solid dodgerblue;">
+    <div class="window-title flex" style="background: dodgerblue; color: white;">
+        <span>MUSIC.EXE</span>
+        <div class="window-close" onclick="toggleWindow('window-playlist')">X</div>
+    </div>
+    <div class="window-popup-content flex column" style="gap: 10px;">
+        <audio id="audio-engine" src=""></audio>
+        <div id="player-track-title" style="font-weight: bold;">TRACK: None</div>
+
+        <div id="player-track-menu" class="flex" style="gap: 6px; justify-content: center;">
+            <button onclick="controlAudio('play')" style="background: cyan;">► PLAY</button>
+            <button onclick="controlAudio('pause')" style="background: yellow;">Ⅱ PAUSE</button>
+            <button onclick="controlAudio('stop')" style="background: red; color: white;">■ STOP</button>
+        </div>
+
+        <!-- This container will be filled by JS -->
+        <div id="playlist-container" class="flex column" style="max-height: 250px; overflow-y: auto;"></div>
+    </div>
+</div>
+
+    <div id="window-commissions" class="window window-popup hidden flex"
+        style="width: 450px; border: 4px solid blueviolet;">
+        <div class="window-title flex" style="background: blueviolet; color: white;">
+            <span>COMMISSIONS.EXE</span>
+            <div class="window-close" onclick="toggleWindow('window-commissions')">X</div>
         </div>
         <div class="window-popup-content flex column" style="gap: 10px;">
-            <p><strong>SYSTEM_STATUS:</strong> <span style="color: lime;">RUNNING</span></p>
-            <p><strong>BROWSER:</strong> <span id="sys-browser">Detecting...</span></p>
-            <p><strong>SCREEN:</strong> <span id="sys-res">...</span></p>
-            <p><strong>UPTIME:</strong> <span id="sys-uptime">0s</span></p>
-            <p><strong>CREATED:</strong> July 5, 2026</p>
-            <details>
-                <summary style="cursor: pointer; color: blue;">VIEW TOOLS & CREDITS</summary>
-                <div style="margin-top: 5px; padding-left: 10px;">
-                    <p><strong>Editor:</strong> VS Code</p>
-                    <p><strong>Graphics:</strong> IbisPaint</p>
-                    <p><strong>Host:</strong> GitHub Pages & Neocities</p>
-                    <p><strong>Theme:</strong> Decora-SugarOS V9</p>
+
+            <div class="comm-banner"
+                style="background: hotpink; color: white; padding: 5px; text-align: center; border: 2px dashed blueviolet; font-weight: bold;">
+                🌈 COMMISSIONS CLOSED! 🌈
+            </div>
+
+            <div class="flex column justify-center align-center">
+                <p style="margin: 0 0 5px 0; font-weight: bold; font-size: 0.9rem;">SLOT STATUS [ 5 / 5 ]</p>
+                <div class="flex" style="gap: 5px;">
+                    <div style="width: 20px; height: 20px; background: limegreen; border: 2px solid white;"></div>
+                    <div style="width: 20px; height: 20px; background: limegreen; border: 2px solid white;"></div>
+                    <div style="width: 20px; height: 20px; background: limegreen; border: 2px solid white;"></div>
+                    <div style="width: 20px; height: 20px; background: limegreen; border: 2px solid white;"></div>
+                    <div style="width: 20px; height: 20px; background: limegreen; border: 2px solid white;"></div>
                 </div>
-            </details>
+            </div>
 
-            <button onclick="optimizeSystem()"
-                style="width: 100%; margin-top: 10px; cursor: pointer; background: #fff; border: 1px solid limegreen;">
-                [ OPTIMIZE SYSTEM ]
-            </button>
+            <div>
+                ✨ <strong>Specialty:</strong> Colorful palettes that pop! Also pixel art!<br>
+                📩 <strong>How to order:</strong> WIP!
+            </div>
+
+            <a href="mailto:your-email@example.com"
+                style="background: blueviolet; color: white; text-align: center; padding: 8px; text-decoration: none; font-weight: bold; border: 2px outset #a020f0;">
+                [ SEND EMAIL ]
+            </a>
         </div>
     </div>
 
-    <div id="window-notepad" class="window window-popup hidden flex" style="width: 300px; border: 4px solid white;">
-        <div class="window-title flex" style="background: white; color: black;">
-            <span>NOTEPAD.EXE</span>
-            <div class="window-close" onclick="toggleWindow('window-notepad')">X</div>
-        </div>
-        <div class="window-popup-content flex column" style="padding: 5px;">
-            <textarea id="notepad-content"
-                style="width: 100%; height: 200px; resize: none; border: 2px inset #ccc;"></textarea>
-        </div>
-    </div>
+
 
     <script src="script.js"></script>
 </body>

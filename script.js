@@ -69,26 +69,34 @@ async function loadSiteData() {
             cache: 'no-store'
         });
         const data = await res.json();
+        
+        const container = document.getElementById('blog-posts-container');
+        if (!container || !data.posts) return;
 
-        const dateEl = document.getElementById('blog-date');
-        const titleEl = document.getElementById('blog-title');
-        const contentEl = document.getElementById('blog-body');
+        container.innerHTML = ""; // Clear existing
 
-        if (contentEl && data.posts && data.posts.length > 0) {
-            const latestPost = data.posts[0];
+        data.posts.forEach(post => {
+            const postEl = document.createElement('div');
+            postEl.style.marginBottom = "20px";
+            postEl.style.borderBottom = "1px solid #ccc";
+            postEl.style.paddingBottom = "10px";
 
-            if (contentEl.innerText !== latestPost.content) {
-                contentEl.classList.add('blog-update-anim');
+            postEl.innerHTML = `
+                <div class="flex" style="align-items: center; gap: 8px; margin-bottom: 5px;">
+                    <img src="/assets/art/Sugar-3-(Jul-4-2026).png" style="width: 40px; height: 40px; border: 2px solid red;">
+                    <div class="flex column">
+                        <span>Sugar0verdosed</span>
+                        <span style="margin-top: 2.5px; font-size: 0.7rem; opacity: 0.6;">${post.date}</span>
+                    </div>
+                </div>
+                <h3 style="margin: 0 0 5px 0;">${post.title}</h3>
+                <div style="font-size: 0.9rem;">${post.content}</div>
+            `;
+            container.appendChild(postEl);
+        });
 
-                dateEl.innerText = latestPost.date;
-                titleEl.innerText = latestPost.title;
-                contentEl.innerText = latestPost.content;
-
-                setTimeout(() => contentEl.classList.remove('blog-update-anim'), 5000);
-            }
-        }
     } catch (e) {
-        console.error("Failed synchronization:", e);
+        console.error("Failed to load blog data:", e);
     }
 }
 
@@ -135,6 +143,34 @@ function controlAudio(action) {
             playerTitle.style.color = "lime";
         }
     }
+}
+
+const myPlaylist = [
+    { title: "混沌ブギ 初音ミク", file: "/assets/audio/music/混沌ブギ 初音ミク.mp3" },
+    { title: "＋♂", file: "/assets/audio/music/plus-boy.mp3" },
+    { title: "BANG BANG BANG", file: "/assets/audio/music/BANG BANG BANG.mp3" },
+    { title: "Chiwawa", file: "/assets/audio/music/Chiwawa.mp3" },
+    { title: "Confessions of a Rotten Girl", file: "/assets/audio/music/Confessions of a Rotten Girl.mp3" }
+];
+
+function populatePlaylist() {
+    const container = document.getElementById('playlist-container');
+    if (!container) return; // Exit if the window isn't open/loaded
+    
+    container.innerHTML = ""; 
+
+    myPlaylist.forEach((song, index) => {
+        const trackDiv = document.createElement('div');
+        trackDiv.className = "playlist-track";
+        trackDiv.style.cursor = "pointer";
+        trackDiv.style.padding = "4px";
+        trackDiv.innerText = `${(index + 1).toString().padStart(2, '0')}. ${song.title}`;
+        
+        // Use your existing playSong function
+        trackDiv.onclick = () => playSong(song.title, song.file);
+        
+        container.appendChild(trackDiv);
+    });
 }
 
 function toggleWindow(id) {
@@ -255,6 +291,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     makeWindowsDraggable();
     loadSiteData();
+    populatePlaylist();
 });
 
 const openSound = new Audio('/assets/audio/ui/Maximize.wav');
@@ -340,7 +377,6 @@ const characterEvents = {
     "2026-7-12": ["Spirit of Japan Festival! ✨"],
     "2026-7-15": ["New Patient Intake"],
     "2026-7-18": ["Santa Ana Flea Market"],
-    "2026-7-20": ["Counseling"],
     "2026-7-21": ["Counseling"],
     "2026-8-7": ["Drop"],
     "2026-8-15": ["Sonic Boost"],
@@ -414,30 +450,6 @@ document.getElementById('nextMonth').onclick = () => { calDate.setMonth(calDate.
 
 fetchHolidays(calDate.getFullYear());
 
-function updateSystemInfo() {
-    document.getElementById('sys-browser').innerText = navigator.appName || "Web-Navigator";
-    document.getElementById('sys-res').innerText = window.screen.width + "x" + window.screen.height;
-
-    let seconds = 0;
-    setInterval(() => {
-        seconds++;
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        document.getElementById('sys-uptime').innerText =
-            (mins > 0 ? mins + "m " : "") + secs + "s";
-    }, 1000);
-}
-
-document.addEventListener('DOMContentLoaded', updateSystemInfo);
-
-function optimizeSystem() {
-    const btn = event.target;
-    btn.innerText = "CLEANING...";
-    setTimeout(() => {
-        btn.innerText = "SYSTEM OPTIMIZED!";
-    }, 1500);
-}
-
 function checkSleepStatus() {
     const now = new Date();
     const hour = now.getHours();
@@ -448,13 +460,3 @@ function checkSleepStatus() {
         setSugarMode('default');
     }
 }
-
-const noteArea = document.getElementById('notepad-content');
-
-// Load saved text
-noteArea.value = localStorage.getItem('user_notes') || "Type your notes here...";
-
-// Save whenever they type
-noteArea.addEventListener('input', () => {
-    localStorage.setItem('user_notes', noteArea.value);
-});
