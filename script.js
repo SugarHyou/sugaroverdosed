@@ -65,7 +65,7 @@ function renderDefaultOptions() {
 
 async function loadSiteData() {
     try {
-        const res = await fetch('https://raw.githubusercontent.com/SugarHyou/sugar0verdosed/main/output/journal.json', {
+        const res = await fetch('https://raw.githubusercontent.com/SugarHyou/sugarhyperdose/main/output/journal.json', {
             cache: 'no-store'
         });
         const data = await res.json();
@@ -85,7 +85,7 @@ async function loadSiteData() {
                 <div class="flex" style="align-items: center; gap: 8px; margin-bottom: 5px;">
                     <img src="/assets/art/Sugar-3-(Jul-4-2026).png" style="width: 40px; height: 40px; border: 2px solid red;">
                     <div class="flex column">
-                        <span>Sugar0verdosed</span>
+                        <span>SugarHyperdose</span>
                         <span style="margin-top: 2.5px; font-size: 0.7rem; opacity: 0.6;">${post.date}</span>
                     </div>
                 </div>
@@ -320,7 +320,7 @@ function triggerBlogAnimation() {
 
 async function updateUIStats() {
     try {
-        const res = await fetch('https://raw.githubusercontent.com/SugarHyou/sugar0verdosed/main/output/journal.json');
+        const res = await fetch('https://raw.githubusercontent.com/SugarHyou/sugarhyperdose/main/output/journal.json');
         const data = await res.json();
 
         if (data.currentStats) {
